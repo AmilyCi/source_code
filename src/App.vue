@@ -2,6 +2,7 @@
   <h1>1、防抖（debounce）</h1>
   <h1>2、节流（throttle）</h1>
   <h1>3、深拷贝（deepClone）</h1>
+  <h1>4、call、apply、bind</h1>
 </template>
 
 <script>
