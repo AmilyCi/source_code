@@ -1,3 +1,4 @@
+// instanceof
 function instanceOf (left, right) {
   let proto = left.__proto__
   while (true) {
