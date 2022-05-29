@@ -1,4 +1,4 @@
-// Promise
+// Promise es6
 
 class MyPromise {
   constructor(executor) {
@@ -81,5 +81,38 @@ class MyPromise {
     //   this.onRejectedCallbacks.push(onRejcted.bind(this))
     // }
     return thenPromise
+  }
+  static all (promises) {
+    const result = []
+    let count = 0
+    return new MyPromise((resolve, reject) => {
+      let addData = (index, value) => {
+        result[index] = value
+        count++
+        if (count === promises.length) return resolve(result)
+      }
+      promises.forEach((promise, index) => {
+        if (promise instanceof MyPromise) {
+          promise.then(res => {
+            addData(index, res)
+          }, err => reject(err))
+        } else {
+          addData(index,promise)
+        }
+      })
+    })
+  }
+  static race (promises) {
+    return new MyPromise((resolve, reject) => {
+      promises.forEach(promise => {
+        if (promise instanceof MyPromise) {
+          promise.then(res => {
+            resolve(res)
+          }, err => reject(err))
+        } else {
+          resolve(promise)
+        }
+      })
+    })
   }
 }
